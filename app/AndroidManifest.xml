@@ -25,6 +25,10 @@
         <activity
             android:name=".StartActivity"
             android:label="@string/title_activity_start" >
+            <intent-filter>
+                <action android:name="com.example.androidfinallyapp.StartAcitvity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

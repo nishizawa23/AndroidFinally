@@ -1,6 +1,7 @@
 package com.example.androidfinallyapp;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.widget.Button;
 public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 	private static final String TAG = "MainActivity";
+	private static final String INTENT_START_ACTIVITY = "com.example.androidfinallyapp.StartAcitvity";
 
 	Button startActivityButton;
 	Button button_1;
@@ -83,6 +85,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.main_start_activity:
 			Log.i(TAG, "satrt activity");
+//			Intent intent = new Intent(this,StartActivity.class);
+//			intent.setAction(INTENT_START_ACTIVITY);
+			Intent intent = new Intent();
+			intent.setAction(INTENT_START_ACTIVITY);
+			startActivity(intent);
 			break;
 
 		default:

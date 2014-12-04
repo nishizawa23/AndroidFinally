@@ -1,16 +1,28 @@
 package com.example.androidfinallyapp;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class StartActivity extends ActionBarActivity {
 
+	private static final String TAG = "StartActivity";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
+
+		Intent intent = getIntent();
+		// 如果界面组件发出的Intent对象没有添加category项，系统会自动添加CATEGORY_DEFAULT项
+		// 这就要求Intent Filter对象中必须包含Intent.GATEFORY_DEFAULT类别，才能匹配此类Intent
+		// 对象
+		String action = intent.getAction();
+		Log.i(TAG, "getAction is : " + action);
+
 	}
 
 	@Override
