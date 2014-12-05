@@ -27,6 +27,7 @@
             android:label="@string/title_activity_start" >
             <intent-filter>
                 <action android:name="com.example.androidfinallyapp.StartAcitvity" />
+                <data android:scheme="file" android:path="/sdcard"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

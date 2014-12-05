@@ -21,7 +21,8 @@ public class StartActivity extends ActionBarActivity {
 		// 这就要求Intent Filter对象中必须包含Intent.GATEFORY_DEFAULT类别，才能匹配此类Intent
 		// 对象
 		String action = intent.getAction();
-		Log.i(TAG, "getAction is : " + action);
+		String dataString = intent.getData().toString();
+		Log.i(TAG, "getAction is : " + action + "Date is :" + dataString);
 
 	}
 

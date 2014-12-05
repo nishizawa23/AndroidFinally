@@ -1,7 +1,9 @@
 package com.example.androidfinallyapp;
 
 import android.support.v7.app.ActionBarActivity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +16,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 	private static final String TAG = "MainActivity";
 	private static final String INTENT_START_ACTIVITY = "com.example.androidfinallyapp.StartAcitvity";
+	private static final Uri INTENT_DATA = Uri
+			.parse("file:///sdcard/sample.data");
 
 	Button startActivityButton;
 	Button button_1;
@@ -85,10 +89,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.main_start_activity:
 			Log.i(TAG, "satrt activity");
-//			Intent intent = new Intent(this,StartActivity.class);
-//			intent.setAction(INTENT_START_ACTIVITY);
+			// Intent intent = new Intent(this,StartActivity.class);
 			Intent intent = new Intent();
 			intent.setAction(INTENT_START_ACTIVITY);
+			intent.setData(INTENT_DATA);
 			startActivity(intent);
 			break;
 
