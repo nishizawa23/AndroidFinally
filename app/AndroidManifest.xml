@@ -27,7 +27,19 @@
             android:label="@string/title_activity_start" >
             <intent-filter>
                 <action android:name="com.example.androidfinallyapp.StartAcitvity" />
-                <data android:scheme="file" android:path="/sdcard"/>
+
+                <data
+                    android:mimeType="image/jpeg"
+                    android:path="/sdcard"
+                    android:scheme="file" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.example.androidfinallyapp.StartAcitvityTwo" />
+
+                <data android:mimeType="text/plain" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
