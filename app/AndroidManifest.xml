@@ -22,11 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- android:priority 是提高intent－filter的优先级，默认为0 -->
         <activity
             android:name=".StartActivity"
             android:label="@string/title_activity_start" >
             <intent-filter>
-                <action android:name="com.example.androidfinallyapp.StartAcitvity" />
+                <action
+                    android:name="com.example.androidfinallyapp.StartAcitvity"
+                    android:priority="1000" />
 
                 <data
                     android:mimeType="image/jpeg"
