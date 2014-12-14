@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidfinallyapp"
+    android:sharedUserId="aaa.bbb"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -27,8 +28,8 @@
         <!-- android:process 组件在新进程中运行 -->
         <activity
             android:name=".StartActivity"
-            android:process=".another_pid"
-            android:label="@string/title_activity_start" >
+            android:label="@string/title_activity_start"
+            android:process=".another_pid" >
             <intent-filter>
                 <action
                     android:name="com.example.androidfinallyapp.StartAcitvity"

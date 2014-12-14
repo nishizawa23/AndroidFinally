@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	private static final String TAG = "MainActivity";
 	private static final String INTENT_START_ACTIVITY = "com.example.androidfinallyapp.StartAcitvity";
 	private static final String INTENT_START_ACTIVITY_TWO = "com.example.androidfinallyapp.StartAcitvityTwo";
+	private static final String INTENT_START_TEST_APP = "com.example.androidfinallyapp.TestApp";
 	private static final Uri INTENT_DATA = Uri
 			.parse("file:///sdcard/sample.data");
 
@@ -81,6 +82,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 					break;
 				case R.id.button3:
 					Log.i(TAG, "onClick button_3");
+					Intent intent3 = new Intent();
+					intent3.setAction(INTENT_START_TEST_APP);
+					startActivity(intent3);
 					break;
 
 				default:
@@ -92,9 +96,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 		button_2.setOnClickListener(handle);
 		button_3.setOnClickListener(handle);
-		
+
 		int pid = android.os.Process.myPid();
-		Log.i(TAG,"MainActivity pid is :"+pid);
+		Log.i(TAG, "MainActivity pid is :" + pid);
 	}
 
 	public void ButtonOnClick(View V) {
