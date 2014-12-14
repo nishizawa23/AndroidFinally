@@ -24,8 +24,10 @@
             </intent-filter>
         </activity>
         <!-- android:priority 是提高intent－filter的优先级，默认为0 -->
+        <!-- android:process 组件在新进程中运行 -->
         <activity
             android:name=".StartActivity"
+            android:process=".another_pid"
             android:label="@string/title_activity_start" >
             <intent-filter>
                 <action

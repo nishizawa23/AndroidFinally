@@ -47,6 +47,9 @@ public class StartActivity extends ActionBarActivity {
 			Log.i(TAG, "start form setComponent smsBoolean is :"
 					+ intent.getExtras().getBoolean("sengto"));
 		}
+		
+		int pid = android.os.Process.myPid();
+		Log.i(TAG,"StartActivity pid is :"+pid);
 
 	}
 

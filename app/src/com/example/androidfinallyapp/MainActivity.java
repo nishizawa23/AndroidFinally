@@ -92,6 +92,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 		button_2.setOnClickListener(handle);
 		button_3.setOnClickListener(handle);
+		
+		int pid = android.os.Process.myPid();
+		Log.i(TAG,"MainActivity pid is :"+pid);
 	}
 
 	public void ButtonOnClick(View V) {
