@@ -1,5 +1,7 @@
 package com.example.androidfinallyapp;
 
+import java.util.logging.Logger;
+
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
 import android.content.ComponentName;
@@ -132,6 +134,22 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		// 再次将该组件切换至前台状态，系统会重新构建该组件对象
+		super.onRestoreInstanceState(savedInstanceState);
+		Log.i(TAG,"onRestoreInstanceState");
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		// 组件被回收之前，android会先调用此函数，将界面组件中的状态数据暂时写入磁盘中
+		super.onSaveInstanceState(savedInstanceState);
+		Log.i(TAG, "onSaveInstanceState");
+
 	}
 
 	@Override
