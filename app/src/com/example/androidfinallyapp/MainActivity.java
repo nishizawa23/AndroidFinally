@@ -21,6 +21,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	private static final String INTENT_START_ACTIVITY = "com.example.androidfinallyapp.StartAcitvity";
 	private static final String INTENT_START_ACTIVITY_TWO = "com.example.androidfinallyapp.StartAcitvityTwo";
 	private static final String INTENT_START_TEST_APP = "com.example.androidfinallyapp.TestApp";
+	private static final String INTENT_START_SERVICE_ON_START_COMMAND = "com.example.androidfinallyapp.ServiceOnStartCommand";
 	private static final Uri INTENT_DATA = Uri
 			.parse("file:///sdcard/sample.data");
 
@@ -106,6 +107,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	public void ButtonOnClick(View V) {
 
 		Log.i(TAG, "onClick button_4");
+		Intent intent = new Intent();
+		intent.setAction(INTENT_START_SERVICE_ON_START_COMMAND);
+		startService(intent);
 
 	}
 
@@ -141,7 +145,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		// 再次将该组件切换至前台状态，系统会重新构建该组件对象
 		super.onRestoreInstanceState(savedInstanceState);
-		Log.i(TAG,"onRestoreInstanceState");
+		Log.i(TAG, "onRestoreInstanceState");
 	}
 
 	@Override
