@@ -59,6 +59,10 @@
                 <action android:name="com.example.androidfinallyapp.ServiceOnStartCommand" />
             </intent-filter>
         </service>
+        <service
+            android:name=".ServiceOnBind"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

@@ -1,13 +1,17 @@
 package com.example.androidfinallyapp;
 
 import java.util.logging.Logger;
+import com.example.androidfinallyapp.ServiceOnBind.SimpleBinder;
 
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,11 +29,16 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	private static final Uri INTENT_DATA = Uri
 			.parse("file:///sdcard/sample.data");
 
+	private SimpleBinder mSimpleBinder;
+	private int addReturn;
+
 	Button startActivityButton;
 	Button button_1;
 	Button button_2;
 	Button button_3;
 	Button button_4;
+	Button button_5;
+	Button button_6;
 
 	View.OnClickListener handle;
 
@@ -64,6 +73,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		button_2 = (Button) findViewById(R.id.button2);
 		button_3 = (Button) findViewById(R.id.button3);
 
+		button_5 = (Button) findViewById(R.id.button5);
+		button_6 = (Button) findViewById(R.id.button6);
+
 		handle = new View.OnClickListener() {
 
 			@Override
@@ -89,6 +101,18 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 					intent3.setAction(INTENT_START_TEST_APP);
 					startActivity(intent3);
 					break;
+				case R.id.button5:
+					Log.i(TAG, "onClik button_5");
+					Intent intent5 = new Intent();
+					ComponentName component = new ComponentName(
+							MainActivity.this, ServiceOnBind.class);
+					intent5.setComponent(component);
+					bindService(intent5, conn, Service.BIND_AUTO_CREATE);
+					break;
+				case R.id.button6:
+					Log.i(TAG, "onClik button_6");
+					unbindService(conn);
+					break;
 
 				default:
 					break;
@@ -99,6 +123,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 		button_2.setOnClickListener(handle);
 		button_3.setOnClickListener(handle);
+		button_5.setOnClickListener(handle);
+		button_6.setOnClickListener(handle);
 
 		int pid = android.os.Process.myPid();
 		Log.i(TAG, "MainActivity pid is :" + pid);
@@ -130,6 +156,23 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 		default:
 			break;
+		}
+	};
+
+	private ServiceConnection conn = new ServiceConnection() {
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			Log.i(TAG, "onServiceConnected");
+
+			mSimpleBinder = (SimpleBinder) service;
+			addReturn = mSimpleBinder.add(1, 3);
+			Log.i(TAG, "ComponentName is " + name.toString() + " addReturn is "
+					+ addReturn);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			Log.i(TAG, "onServiceDisconnected");
 		}
 	};
 
