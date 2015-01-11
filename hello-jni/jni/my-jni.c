@@ -19,6 +19,9 @@ static const char* kClassName="com/example/hellojni/HelloJni";
  *
  *   apps/samples/hello-jni/project/src/com/example/hellojni/HelloJni.java
  */
+//这个函数可以用javah生成，具体方法是先用eclipse运行一下，生成class
+//进入project/bin/class 执行javah -classpath . -jni com.example.hellojni.HelloJni
+
 jstring Java_com_example_hellojni_HelloJni_exampleFromJNI(JNIEnv* env,
 		jobject thiz) {
 
