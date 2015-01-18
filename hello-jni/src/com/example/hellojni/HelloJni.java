@@ -18,51 +18,82 @@ package com.example.hellojni;
 import android.app.Activity;
 import android.widget.TextView;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
+public class HelloJni extends Activity {
+	private static Handler h;
+	TextView tv;
 
-public class HelloJni extends Activity
-{
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        /* Create a TextView and set its content.
-         * the text is retrieved by calling a native
-         * function.
-         */
-        TextView  tv = new TextView(this);
-        tv.setText( exampleFromJNI());
-        setContentView(tv);
-    }
+		/*
+		 * Create a TextView and set its content. the text is retrieved by
+		 * calling a native function.
+		 */
+		tv = new TextView(this);
+		tv.setText(exampleFromJNI());
+		setContentView(tv);
 
-    /* A native method that is implemented by the
-     * 'hello-jni' native library, which is packaged
-     * with this application.
-     */
-    public native String  stringFromJNI();
-    
-    public native String  exampleFromJNI();
+		h = new Handler() {
+			public void handleMessage(Message msg) {
+				tv.setText(msg.obj.toString());
+			}
+		};
+		nativeSetup();
+		//nativeExecute(10);
+		nativeExec(8);
+	}
 
-    /* This is another native method declaration that is *not*
-     * implemented by 'hello-jni'. This is simply to show that
-     * you can declare as many native methods in your Java code
-     * as you want, their implementation is searched in the
-     * currently loaded native libraries only the first time
-     * you call them.
-     *
-     * Trying to call this function will result in a
-     * java.lang.UnsatisfiedLinkError exception !
-     */
-    public native String  unimplementedStringFromJNI();
+	private static void setValue(int value) {
+		String str = "Value(static) = " + String.valueOf(value);
+		Message m = h.obtainMessage(1, 1, 1, str);
+		h.sendMessage(m);
+	}
 
-    /* this is used to load the 'hello-jni' library on application
-     * startup. The library has already been unpacked into
-     * /data/data/com.example.hellojni/lib/libhello-jni.so at
-     * installation time by the package manager.
-     */
-    static {
-        System.loadLibrary("hello-jni");
-    }
+	private void setV(int value) {
+		String str = "Value = " + String.valueOf(value);
+		Message m = h.obtainMessage(1, 1, 1, str);
+		h.sendMessage(m);
+	}
+
+	/*
+	 * A native method that is implemented by the 'hello-jni' native library,
+	 * which is packaged with this application.
+	 */
+	public native String stringFromJNI();
+
+	public native String exampleFromJNI();
+
+	// add by huangxinghua for test c call java
+	public native void nativeSetup();
+
+	public native static void nativeExecute(int n);
+
+	public native void nativeExec(int n);
+
+	/*
+	 * This is another native method declaration that is *not* implemented by
+	 * 'hello-jni'. This is simply to show that you can declare as many native
+	 * methods in your Java code as you want, their implementation is searched
+	 * in the currently loaded native libraries only the first time you call
+	 * them.
+	 * 
+	 * Trying to call this function will result in a
+	 * java.lang.UnsatisfiedLinkError exception !
+	 */
+	public native String unimplementedStringFromJNI();
+
+	/*
+	 * this is used to load the 'hello-jni' library on application startup. The
+	 * library has already been unpacked into
+	 * /data/data/com.example.hellojni/lib/libhello-jni.so at installation time
+	 * by the package manager.
+	 */
+	static {
+		System.loadLibrary("hello-jni");
+	}
 }
