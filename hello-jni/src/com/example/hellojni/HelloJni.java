@@ -24,6 +24,7 @@ import android.os.Message;
 public class HelloJni extends Activity {
 	private static Handler h;
 	TextView tv;
+	private int numb;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -37,6 +38,8 @@ public class HelloJni extends Activity {
 		tv = new TextView(this);
 		tv.setText(exampleFromJNI());
 		setContentView(tv);
+		
+		numb = 100;
 
 		h = new Handler() {
 			public void handleMessage(Message msg) {
@@ -45,7 +48,7 @@ public class HelloJni extends Activity {
 		};
 		nativeSetup();
 		//nativeExecute(10);
-		nativeExec(8);
+		nativeExec();
 	}
 
 	private static void setValue(int value) {
@@ -73,7 +76,7 @@ public class HelloJni extends Activity {
 
 	public native static void nativeExecute(int n);
 
-	public native void nativeExec(int n);
+	public native void nativeExec();
 
 	/*
 	 * This is another native method declaration that is *not* implemented by

@@ -16,6 +16,7 @@ static const char* kClassName = "com/example/hellojni/HelloJni";
 jclass m_class;
 jobject m_object;
 jmethodID m_mid_static, m_mid;
+jfieldID m_fid;
 
 /* This is a trivial JNI example where we use a native method
  * to return a new VM String. See the corresponding Java source
@@ -37,12 +38,14 @@ void CounterNative_nativeSetup(JNIEnv *env, jobject thiz) {
 	m_object = (jobject)(*env)->NewGlobalRef(env, thiz);
 	m_mid_static = (*env)->GetStaticMethodID(env, m_class, "setValue", "(I)V");
 	m_mid = (*env)->GetMethodID(env, m_class, "setV", "(I)V");
+	m_fid = (*env)->GetFieldID(env, clazz, "numb", "I");
 	return;
 }
 
-void CounterNative_nativeExec(JNIEnv *env, jclass clazz, jint n) {
+void CounterNative_nativeExec(JNIEnv *env, jclass clazz) {
 	int i, sum = 0;
-	for (i = 0; i <= n; i++)
+	int numb = (int) (*env)->GetIntField(env, m_object, m_fid);
+	for (i = 0; i <= numb; i++)
 		sum += i;
 	(*env)->CallVoidMethod(env, m_object, m_mid, sum);
 	return;
@@ -62,7 +65,7 @@ static JNINativeMethod gMethods[] = { { "exampleFromJNI",
 		(void*) Java_com_example_hellojni_HelloJni_exampleFromJNI }, {
 		"nativeSetup", "()V", (void*) CounterNative_nativeSetup }, {
 		"nativeExecute", "(I)V", (void*) CounterNative_nativeExecute }, {
-		"nativeExec", "(I)V", (void*) CounterNative_nativeExec }, };
+		"nativeExec", "()V", (void*) CounterNative_nativeExec }, };
 
 static int RegisterNativeMethods(JNIEnv* env, const char* className,
 		JNINativeMethod* gMethods, int numMethods) {
