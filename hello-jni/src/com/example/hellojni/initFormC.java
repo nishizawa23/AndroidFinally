@@ -13,7 +13,7 @@ public class initFormC {
 	
 	private void test() {
 		
-		Log.i(TAG,"hello form test");		
+		Log.i(TAG,"hello form test : "+Thread.currentThread().getId());		
 	}
 
 }

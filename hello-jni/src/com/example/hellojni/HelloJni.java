@@ -49,6 +49,8 @@ public class HelloJni extends Activity {
 		nativeSetup();
 		//nativeExecute(10);
 		nativeExec();
+		
+		threadTest();
 	}
 
 	private static void setValue(int value) {
@@ -77,6 +79,8 @@ public class HelloJni extends Activity {
 	public native static void nativeExecute(int n);
 
 	public native void nativeExec();
+	
+	public native void threadTest();
 
 	/*
 	 * This is another native method declaration that is *not* implemented by
